@@ -55,6 +55,34 @@ public:
         }
     }
 };
-int main()
+signed main()
 {
+    int t;
+    cin >> t;
+    while (t--)
+    {
+        string s;
+        cin >> s;
+        vector<int> a((int)s.size() + 1, 0);
+        map<int, vector<int>> mp;
+        for (int i = 1; i <= (int)s.size(); i++)
+        {
+            int k = a[i - 1];
+            if (s[i - 1] == '(')
+            {
+                a[i] = k + 1;
+            }
+            else
+            {
+                a[i] = k - 1;
+            }
+            mp[a[i]].push_back(i);
+        }
+        SparseTable st(a);
+        for (int i = 0; i < a.size(); i++)
+            cout << a[i] << " ";
+        cout << endl;
+        cout << st.query(0, 1) << endl;
+        cout << st.query(0, 2) << endl;
+    }
 }
