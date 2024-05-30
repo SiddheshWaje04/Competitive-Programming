@@ -79,10 +79,37 @@ signed main()
             mp[a[i]].push_back(i);
         }
         SparseTable st(a);
-        for (int i = 0; i < a.size(); i++)
-            cout << a[i] << " ";
-        cout << endl;
-        cout << st.query(0, 1) << endl;
-        cout << st.query(0, 2) << endl;
+
+        // for (int i = 0; i < a.size(); i++)
+        //     cout << a[i] << " ";
+        // cout << endl;
+
+        // cout << st.query(0, 1) << endl;
+        // cout << st.query(0, 2) << endl;
+        int ct = 0, ans = 0;
+        for (auto k : mp)
+        {
+            // for (auto p : k.second)
+            //     cout << p << " ";
+            // cout << endl;
+            ct = 0;
+            if (k.first != 0)
+            {
+                for (int i = 1; i < k.second.size(); i++)
+                {
+                    if (st.query(k.second[i - 1], k.second[i]) <= 2 * a[k.second[i - 1]])
+                    {
+                        ct++;
+                    }
+                    else
+                    {
+                        ct = 0;
+                    }
+                    ans += ct;
+                    // cout << k.first << " " << ct << " " << ans << endl;
+                }
+            }
+        }
+        cout << ans << endl;
     }
 }
